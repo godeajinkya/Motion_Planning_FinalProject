@@ -1,0 +1,59 @@
+******************************** PRM *******************************************
+Programming Assignment 4: Sampling Based Navigation
+
+By Ajinkya Gode
+   Sagar Virk
+********************************************************************************
+
+Code operation:
+
+1. Run prmplanner.py
+
+Results:
+1. prm_roadmap.txt is saved in the results folder 
+2. few random cases and default case path solutions screenshots are also present there
+
+Algorithm implementation:
+
+1. Sampling: We tried three different sampling approaches.
+		The first approach was defined by equally spaced samples where the 
+		control variable was the sample distance in between adjacent samples
+		which gives a grid like sampling. Some random noise introduced in the
+		samples.
+
+		The second approach was random intergers in the configuration space
+		where the number of nodes were the controlling variable.
+		This introduced little unwanted clustering.
+		
+		The third approach was a variation of the first approach where the 
+		controlling variable was the number of nodes.
+
+we decided to go with the first approach though its not the perfect approach. Few problems
+that we faced were:
+Clustering
+unavailability of nodes in certain region
+
+2. Roadmap and Search algorithm: The roadmap is constructed with by using an approach similar
+				 to the depth first search. Where we first populate and pop 
+				 a stacking set which then populates the visited set.
+				 Using both of these, constraining the no. of neighbors
+				 a node can have and collision avoidance functions we
+				 optimised the roadmap.
+
+Using the first sampling approach and this roadmap approach we got a map which populates 
+almost all the configuration space without any discontinuity while avoiding any loops.
+This almost works 9/10 times. Sometimes there is a single point in config space not
+connected to any other node.
+
+3. A star: We used the learnings from assignment 3 to implement the A-star algortihm.
+	   We passed the configuration IDs through the A-star algorithm. The heuristic
+	   was taken as the euclidian distance of the point from the goal. The cost
+	   associated was taken as the actual distance travelled upto that point.
+	   The path was traced in reverse manner from goal to start using the parent
+	   list as a tracker for finding the parent of each node.
+	   The path was reversed as we needed to covert goal-start path to start-goal
+	   path. The path is then sent to scene.py where it is plotted.
+
+4. Functions: We populated 4 repeatedly used functions. We populated the nearest neighbor,
+	      distance, collision and interpolation function. We did not use the nearest 
+	      neighbor function as we required a more hybrid approach for finding neighbors.
