@@ -16,7 +16,7 @@
   </include>  
 
   <!-- G-mapping -->
-  <include file="$(find turtlebot3_slam)/launch/turtlebot3_gmapping_new.launch">
+  <include file="$(find turtlebot3_slam)/launch/turtlebot3_gmapping.launch">
   </include>
 
   <!-- Simulation -->
